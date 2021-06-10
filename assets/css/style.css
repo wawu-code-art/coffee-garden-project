@@ -1,3 +1,35 @@
-.jumbotron{
-    background-color:rgb(109, 6, 6); 
-}
+ 
+    .jumbotron {
+        padding-top: 7rem;
+        background-color: rgba(196, 129, 29, 0.712);
+    }
+
+    .produk {
+        background-color: rgba(196, 129, 29, 0.712);
+    }
+
+    .navbar {
+        background-color: rgb(109, 6, 6);
+    }
+
+    .about {
+        font-size: small;
+    }
+
+    .harga {
+        font-size: smaller;
+    }
+
+    footer {
+        background-color: rgb(109, 6, 6);
+        color: white;
+    }
+
+    a.wawu {
+        color: white;
+    }
+
+    section {
+        padding-top: 6rem;
+    }
+ 
