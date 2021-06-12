@@ -35,12 +35,12 @@ class Auth extends CI_Controller
         // jika usernya ada
         if ($user) {
             //jika password benar
-            if (password_verify($password, $user['password'])) {
+            if ($password == $user['password']) {
                 $data = [
                     'email' => $user['email']
                 ];
                 $this->session->set_userdata($data);
-                redirect('user');
+                redirect('admin');
             } else {
                 // jika password salah
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');

@@ -16,9 +16,13 @@ class Admin extends CI_Controller
         // if ($this->input->post('keyword')) {
         //     $data['products'] = $this->Admin_model->cariDataProducts();
         // }
-        $this->load->view('templates/header', $data);
-        $this->load->view('admin/index', $data);
-        $this->load->view('templates/footer');
+        // $this->load->view('templates/header', $data);
+        // $this->load->view('admin/index', $data);
+        // $this->load->view('templates/footer');
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('admin/index');
     }
 
     // public function tambah()
