@@ -6,7 +6,6 @@ class Auth extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // $this->load->model('Admin_model');
         $this->load->library('form_validation');
     }
 
@@ -32,7 +31,32 @@ class Auth extends CI_Controller
         $password = $this->input->post('password');
 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
-        var_dump($user);
-        die;
+
+        // jika usernya ada
+        if ($user) {
+            //jika password benar
+            if (password_verify($password, $user['password'])) {
+                $data = [
+                    'email' => $user['email']
+                ];
+                $this->session->set_userdata($data);
+                redirect('user');
+            } else {
+                // jika password salah
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong password!</div>');
+                redirect('auth');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not registered!</div>');
+            redirect('auth');
+        }
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('email');
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out!</div>');
+        redirect('auth');
     }
 }

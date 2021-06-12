@@ -12,10 +12,10 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['judul'] = 'Products for Admin';
-        $data['products'] = $this->Admin_model->getAllProducts();
-        if ($this->input->post('keyword')) {
-            $data['products'] = $this->Admin_model->cariDataProducts();
-        }
+        // $data['products'] = $this->Admin_model->getAllProducts();
+        // if ($this->input->post('keyword')) {
+        //     $data['products'] = $this->Admin_model->cariDataProducts();
+        // }
         $this->load->view('templates/header', $data);
         $this->load->view('admin/index', $data);
         $this->load->view('templates/footer');
