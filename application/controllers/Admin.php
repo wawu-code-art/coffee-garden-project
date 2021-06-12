@@ -5,24 +5,20 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Admin_model');
-        $this->load->library('form_validation');
+        // $this->load->model('Admin_model');
+        // $this->load->library('form_validation');
     }
 
     public function index()
     {
-        $data['judul'] = 'Products for Admin';
-        // $data['products'] = $this->Admin_model->getAllProducts();
-        // if ($this->input->post('keyword')) {
-        //     $data['products'] = $this->Admin_model->cariDataProducts();
-        // }
-        // $this->load->view('templates/header', $data);
-        // $this->load->view('admin/index', $data);
-        // $this->load->view('templates/footer');
+        $data['tittle'] = 'Administrator';
+        $data['admin'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $this->load->view('admin/index');
+        $this->load->view('templates/admin_header', $data);
+        $this->load->view('templates/admin_sidebar', $data);
+        $this->load->view('templates/admin_topbar', $data);
+        $this->load->view('admin/index', $data);
+        $this->load->view('templates/admin_footer', $data);
     }
 
     // public function tambah()

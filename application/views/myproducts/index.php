@@ -29,15 +29,15 @@
         <tbody>
             <tr>
                 <?php $i = 1; ?>
-                <?php foreach ($ourproducts as $ourproduct) : ?>
+                <?php foreach ($myproducts as $myproduct) : ?>
                     <td><?= $i; ?></td>
-                    <td><?= $ourproduct['productname']; ?></td>
-                    <td><?= $ourproduct['price']; ?></td>
-                    <td><?= $ourproduct['image']; ?></td>
-                    <td><?= $ourproduct['description']; ?></td>
+                    <td><?= $myproduct['name']; ?></td>
+                    <td><?= $myproduct['price']; ?></td>
+                    <td><?= $myproduct['image']; ?></td>
+                    <td><?= $myproduct['description']; ?></td>
                     <td></td>
                     <td>
-                        <a href="<?= base_url(); ?>draftcutsample/scan/<?= $ourproduct['id']; ?>" class="badge badge-success float-left">details</a>
+                        <a href="<?= base_url(); ?>draftcutsample/scan/<?= $myproduct['product_id']; ?>" class="badge badge-success float-left">details</a>
                     </td>
             </tr>
             <?php $i = $i + 1; ?>
