@@ -9,7 +9,7 @@ class Myproducts_model extends CI_model
 
     public function getMyproductsById($id)
     {
-        return $this->db->get_where('products', ['id_product' => $id])->row_array();
+        return $this->db->get_where('products', ['product_id' => $id])->row_array();
     }
 
     public function cariDataMyproducts()

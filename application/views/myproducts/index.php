@@ -37,7 +37,7 @@
                     <td><?= $myproduct['description']; ?></td>
                     <td></td>
                     <td>
-                        <a href="<?= base_url(); ?>draftcutsample/scan/<?= $myproduct['product_id']; ?>" class="badge badge-success float-left">details</a>
+                        <a href="<?= base_url(); ?>myproducts/detail/<?= $myproduct['product_id']; ?>" class="badge badge-success float-left">details</a>
                     </td>
             </tr>
             <?php $i = $i + 1; ?>
