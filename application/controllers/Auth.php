@@ -7,7 +7,7 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->library('email');
+        // $this->load->library('email');
     }
 
     public function index()
@@ -72,18 +72,22 @@ class Auth extends CI_Controller
             'mailtype' => 'html',
             'charset' => 'utf-8',
             'newline' => "\r\n",
+            'charset' => 'iso-8859-1',
+            'wordwrap' => TRUE,
+
         ];
 
 
-        $this->load->initialize($config);
+        $this->email->initialize($config);
+        $this->load->library('email', $config);
 
         $this->email->from('warisanwawu@gmail.com', 'Heribertus Wiku');
-        // $this->email->to($this->input->post('email'));
-        $this->email->to('wiku.heribertus@gmail.com');
+        $this->email->to($this->input->post('email'));
 
         // test
         // $this->email->subject('Reset Password');
         // $this->email->message('Hello World');
+        // $this->email->send();
         // end test
 
         if ($type == 'forgot') {
