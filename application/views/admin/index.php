@@ -17,13 +17,6 @@
 <!-- <div class="container"> -->
 
 
-<!-- start tombol tambah -->
-<!-- <div class="row mt-3">
-        <div class="col-md-6">
-            <a href="<?= base_url(); ?>draftcutsample/tambah" class="btn btn-primary">Add Data Products</a>
-        </div>
-    </div> -->
-<!-- end tombol tambah -->
 
 <!-- start tombol cari -->
 <!-- <div class="row mt-3">

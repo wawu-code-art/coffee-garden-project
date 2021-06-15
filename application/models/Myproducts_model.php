@@ -20,4 +20,34 @@ class Myproducts_model extends CI_model
         $this->db->or_like('description', $keyword);
         return $this->db->get('products')->result_array();
     }
+
+    public function tambahMyProducts()
+    {
+        $data = [
+            "name" => $this->input->post('name', true),
+            "price" => $this->input->post('price', true),
+            "image" => $this->input->post('image', true),
+            "description" => $this->input->post('description', true),
+        ];
+
+        $this->db->insert('products', $data);
+    }
+
+    public function hapusMyProducts($id)
+    {
+        $this->db->delete('products', ['product_id' => $id]);
+    }
+
+    public function ubahDataProducts()
+    {
+        $data = [
+            "name" => $this->input->post('name', true),
+            "price" => $this->input->post('price', true),
+            "image" => $this->input->post('image', true),
+            "description" => $this->input->post('description', true),
+        ];
+
+        $this->db->where('product_id', $this->input->post('id'));
+        $this->db->update('products', $data);
+    }
 }

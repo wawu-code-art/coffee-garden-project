@@ -15,6 +15,14 @@
     </div>
     <!-- end tombol search -->
 
+    <!-- start tombol tambah -->
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <a href="<?= base_url(); ?>myproducts/tambah" class="btn btn-primary">Add Data Products</a>
+        </div>
+    </div>
+    <!-- end tombol tambah -->
+
     <!-- start table -->
     <table class="table mt-3">
         <thead class="thead-dark">
@@ -24,6 +32,7 @@
                 <th>Price</th>
                 <th>Image</th>
                 <th>Description</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -35,9 +44,12 @@
                     <td><?= $myproduct['price']; ?></td>
                     <td><?= $myproduct['image']; ?></td>
                     <td><?= $myproduct['description']; ?></td>
-                    <td></td>
                     <td>
-                        <a href="<?= base_url(); ?>myproducts/detail/<?= $myproduct['product_id']; ?>" class="badge badge-success float-left">details</a>
+                        <a href="<?= base_url(); ?>myproducts/detail/<?= $myproduct['product_id']; ?>" class="badge badge-info float-left">details</a>
+                        <br>
+                        <a href="<?= base_url(); ?>myproducts/ubah/<?= $myproduct['product_id']; ?>" class="badge badge-success float-left">change</a>
+                        <br>
+                        <a href="<?= base_url(); ?>myproducts/delete/<?= $myproduct['product_id']; ?>" class="badge badge-danger float-left">delete</a>
                     </td>
             </tr>
             <?php $i = $i + 1; ?>

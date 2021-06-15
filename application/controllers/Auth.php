@@ -7,7 +7,6 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        // $this->load->library('email');
     }
 
     public function index()
@@ -36,7 +35,7 @@ class Auth extends CI_Controller
         // jika usernya ada
         if ($user) {
             //jika password benar
-            if ($password == $user['password']) {
+            if (password_verify($password, $user['password'])) {
                 $data = [
                     'email' => $user['email']
                 ];
@@ -83,12 +82,6 @@ class Auth extends CI_Controller
 
         $this->email->from('warisanwawu@gmail.com', 'Heribertus Wiku');
         $this->email->to($this->input->post('email'));
-
-        // test
-        // $this->email->subject('Reset Password');
-        // $this->email->message('Hello World');
-        // $this->email->send();
-        // end test
 
         if ($type == 'forgot') {
             $this->email->subject('Reset Password');
