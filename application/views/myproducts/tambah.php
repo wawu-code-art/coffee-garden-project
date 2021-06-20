@@ -8,7 +8,7 @@
                     <?= $title ?>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">Product Name</label>
                             <input type="text" name="name" class="form-control" id="name" value="<?= set_value('name'); ?>">
@@ -21,8 +21,8 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Image</label>
-                            <input type="text" name="image" class="form-control" id="image" value="<?= set_value('image'); ?>">
-                            <small class="form-text text-danger"><?= form_error('image'); ?></small>
+                            <input type="file" name="image" id="image">
+                            <!-- <small class="form-text text-danger"><?= form_error('image'); ?></small> -->
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>

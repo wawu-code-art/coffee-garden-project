@@ -8,8 +8,9 @@
                     <?= $title ?>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?= $myproduct['product_id']; ?>">
+                        <input type="hidden" name="gambarLama" value="<?= $myproduct['image']; ?>">
                         <div class="form-group">
                             <label for="name">Product Name</label>
                             <input type="text" name="name" class="form-control" id="name" value="<?= $myproduct['name']; ?>">
@@ -22,7 +23,8 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Image</label>
-                            <input type="text" name="image" class="form-control" id="image" value="<?= $myproduct['image']; ?>">
+                            <img src="base_url()/assets/img/<?= $myproduct['image'] ?>">Image</img>
+                            <input type="file" name="image" class="form-control" id="image" value="<?= $myproduct['image']; ?>">
                             <small class="form-text text-danger"><?= form_error('image'); ?></small>
                         </div>
                         <div class="form-group">
