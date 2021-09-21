@@ -26,17 +26,13 @@ class Myproducts_model extends CI_model
         $data = [
             "name" => $this->input->post('name', true),
             "price" => $this->input->post('price', true),
-
-            "image" => $this->input->upload(),
+            "image" => $this->upload(),
             "description" => $this->input->post('description', true),
         ];
         if (!$data['image']) {
             return false;
         }
 
-        var_dump($_POST);
-        var_dump($_FILES);
-        die;
         $this->db->insert('products', $data);
     }
 
@@ -57,7 +53,7 @@ class Myproducts_model extends CI_model
         $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
         $ekstensiGambar = explode('.', $namaFile);
         $ekstensiGambar = strtolower(end($ekstensiGambar));
-        if (in_array($ekstensiGambar, $ekstensiGambarValid)) {
+        if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
             echo "<script> alert ('please select jpg, jpeg, or png file!') </script>";
             return false;
         }
@@ -68,11 +64,13 @@ class Myproducts_model extends CI_model
             return false;
         }
 
+        // lolos pengecekan, gambar siap di upload
+        //generate nama gambar baru
         $namaFileBaru = uniqid();
         $namaFileBaru .= '.';
         $namaFileBaru .= $ekstensiGambar;
-        move_uploaded_file($tmpName, 'base_url()/assets/img/' . $namaFile);
-        return $namaFile;
+        move_uploaded_file($tmpName, 'base_url()/assets/img/' . $namaFileBaru);
+        return $namaFileBaru;
     }
 
     public function hapusMyProducts($id)
@@ -85,9 +83,12 @@ class Myproducts_model extends CI_model
         $data = [
             "name" => $this->input->post('name', true),
             "price" => $this->input->post('price', true),
-            "image" => $this->input->post('image', true),
+            "image" => $this->upload(),
             "description" => $this->input->post('description', true),
         ];
+        if (!$data['image']) {
+            return false;
+        }
 
         $this->db->where('product_id', $this->input->post('id'));
         $this->db->update('products', $data);

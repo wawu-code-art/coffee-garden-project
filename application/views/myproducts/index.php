@@ -1,5 +1,16 @@
 <div class="container">
 
+    <?php if ($this->session->flashdata('flash')) : ?>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Data product <strong>has been </strong> <?= $this->session->flashdata('flash'); ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <!-- start tombol search -->
     <div class="row mt-3">
         <div class="col-md-3">

@@ -45,7 +45,7 @@ class Myproducts extends CI_Controller
 
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('price', 'Price', 'required|numeric');
-        $this->form_validation->set_rules('image', 'Image', 'required');
+        // $this->form_validation->set_rules('image', 'Image', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -56,6 +56,9 @@ class Myproducts extends CI_Controller
             $this->load->view('templates/admin_footer');
         } else {
             $this->Myproducts_model->tambahMyProducts();
+            // var_dump($_POST);
+            // var_dump($_FILES);
+            // die;
             $this->session->set_flashdata('flash', 'Added');
             redirect('myproducts');
         }
@@ -76,7 +79,7 @@ class Myproducts extends CI_Controller
 
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('price', 'Price', 'required|numeric');
-        $this->form_validation->set_rules('image', 'Image', 'required');
+        // $this->form_validation->set_rules('image', 'Image', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
 
         if ($this->form_validation->run() == false) {

@@ -1,3 +1,12 @@
+<?php
+// cek apakah tombol sumbit sudah ditekan atau belum
+// if (isset($_POST["submit"])) {
+//     var_dump($_POST);
+//     var_dump($_FILES);
+//     die;
+// }
+?>
+
 <div class="container">
 
     <div class="row mt-3">
@@ -31,7 +40,7 @@
                         </div>
                         <div>
                             <a href="<?= base_url(); ?>myproducts/index/" class="btn btn-secondary">Back</a>
-                            <button type="submit" name="tambah" class="btn btn-primary float-right">Add Data</button>
+                            <button type="submit" name="submit" class="btn btn-primary float-right">Add Data</button>
                         </div>
                     </form>
                 </div>
