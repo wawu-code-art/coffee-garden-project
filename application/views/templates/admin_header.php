@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?= $tittle; ?></title>
+    <title>Coffee Garden Admin - Login</title>
+    <!-- <title> $title </title> -->
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets'); ?> /vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

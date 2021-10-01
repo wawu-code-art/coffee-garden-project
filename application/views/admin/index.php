@@ -2,65 +2,27 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+    <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
-</div>
-<!-- /.container-fluid -->
-
-</div>
-<!-- End of Main Content -->
-
-
-
-
-
-<!-- <div class="container"> -->
-
-
-
-<!-- start tombol cari -->
-<!-- <div class="row mt-3">
-        <div class="col-md-3">
-            <form action="" method="post">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Type a word.." name="keyword">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </div>
-                </div>
-            </form>
+    <div class="row">
+        <div class="col-lg-6">
+            <?= $this->session->flashdata('message'); ?>
         </div>
-    </div> -->
-<!-- end tombol cari -->
+    </div>
 
-<!-- start table -->
-<!-- <table class="table mt-3">
-        <thead class="thead-dark">
-            <tr>
-                <th>No</th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <?php $i = 1; ?>
-                <?php foreach ($products as $product) : ?>
-                    <td><?= $i; ?></td>
-                    <td><?= $product['productname']; ?></td>
-                    <td><?= $product['price']; ?></td>
-                    <td><?= $product['image']; ?></td>
-                    <td><?= $product['description']; ?></td>
-                    <td></td>
-                    <td>
-                        <a href="<?= base_url(); ?>draftcutsample/scan/<?= $product['id']; ?>" class="badge badge-success float-left">details</a>
-                    </td>
-            </tr>
-            <?php $i = $i + 1; ?>
-        <?php endforeach; ?>
-        </tr>
-        </tbody>
-    </table> -->
-<!-- end table -->
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="<?= base_url('assets/img/admin/') . $admin['image']; ?>" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <p class="card-text"><?= $admin['email'] ?></p>
+                    <label class="form-label large"><?= $admin['name'] ?></label>
+                    <p class="card-text"><small class="text-muted">Administrator</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

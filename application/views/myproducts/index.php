@@ -53,7 +53,9 @@
                     <td><?= $i; ?></td>
                     <td><?= $myproduct['name']; ?></td>
                     <td><?= $myproduct['price']; ?></td>
-                    <td><?= $myproduct['image']; ?></td>
+                    <td>
+                        <img src="<?= base_url('assets/img/products/') . $myproduct['image']; ?>" class="img-fluid rounded-start" alt="...">
+                    </td>
                     <td><?= $myproduct['description']; ?></td>
                     <td>
                         <a href="<?= base_url(); ?>myproducts/detail/<?= $myproduct['product_id']; ?>" class="badge badge-info float-left">details</a>

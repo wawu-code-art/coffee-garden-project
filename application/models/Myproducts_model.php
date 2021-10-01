@@ -26,55 +26,31 @@ class Myproducts_model extends CI_model
         $data = [
             "name" => $this->input->post('name', true),
             "price" => $this->input->post('price', true),
-            "image" => $this->upload(),
+            "image" => $_FILES['image']['name'],
             "description" => $this->input->post('description', true),
         ];
-        if (!$data['image']) {
-            return false;
-        }
+        if ($data['image']) {
+            $config['allowed_types']    = 'gif|jpg|png|jpeg';
+            $config['max_size']         = '2048';
+            $config['upload_path']      = './assets/img/products/';
 
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('image')) {
+                $new_image = $this->upload->data('file_name');
+                $this->db->set('image', $new_image);
+            } else {
+                echo $this->upload->display_errors();
+            }
+        }
         $this->db->insert('products', $data);
-    }
-
-    public function upload()
-    {
-        $namaFile = $_FILES['image']['name'];
-        $ukuranFile = $_FILES['image']['size'];
-        $error = $_FILES['image']['error'];
-        $tmpName = $_FILES['image']['tmp_name'];
-
-        // cek apakah ada gambar yang di upload
-        if ($error === 4) {
-            echo "<script> alert ('please select file!') </script>";
-            return false;
-        }
-
-        // cek apakah gambar yang di upload adalah gambar
-        $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
-        $ekstensiGambar = explode('.', $namaFile);
-        $ekstensiGambar = strtolower(end($ekstensiGambar));
-        if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
-            echo "<script> alert ('please select jpg, jpeg, or png file!') </script>";
-            return false;
-        }
-
-        // cek jika ukuran file terlalu besar
-        if ($ukuranFile == 1000000) {
-            echo "<script> alert ('file size maximum 1mb!') </script>";
-            return false;
-        }
-
-        // lolos pengecekan, gambar siap di upload
-        //generate nama gambar baru
-        $namaFileBaru = uniqid();
-        $namaFileBaru .= '.';
-        $namaFileBaru .= $ekstensiGambar;
-        move_uploaded_file($tmpName, 'base_url()/assets/img/' . $namaFileBaru);
-        return $namaFileBaru;
     }
 
     public function hapusMyProducts($id)
     {
+        $productbyid = $this->db->get_where('products', ['product_id' => $id])->row_array();
+        $old_image = $productbyid['image'];
+        unlink(FCPATH . 'assets/img/products/' . $old_image);
         $this->db->delete('products', ['product_id' => $id]);
     }
 
@@ -83,7 +59,7 @@ class Myproducts_model extends CI_model
         $data = [
             "name" => $this->input->post('name', true),
             "price" => $this->input->post('price', true),
-            "image" => $this->upload(),
+            // "image" => $this->upload(),
             "description" => $this->input->post('description', true),
         ];
         if (!$data['image']) {
