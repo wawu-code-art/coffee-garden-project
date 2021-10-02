@@ -54,19 +54,7 @@ class Myproducts_model extends CI_model
         $this->db->delete('products', ['product_id' => $id]);
     }
 
-    public function ubahDataProducts()
-    {
-        $data = [
-            "name" => $this->input->post('name', true),
-            "price" => $this->input->post('price', true),
-            // "image" => $this->upload(),
-            "description" => $this->input->post('description', true),
-        ];
-        if (!$data['image']) {
-            return false;
-        }
-
-        $this->db->where('product_id', $this->input->post('id'));
-        $this->db->update('products', $data);
-    }
+    // public function ubahDataProducts()
+    // {
+    // }
 }

@@ -75,8 +75,8 @@ class Auth extends CI_Controller
             'mailtype' => 'html',
             'charset' => 'utf-8',
             'newline' => "\r\n",
-            'charset' => 'iso-8859-1',
-            'wordwrap' => TRUE,
+            // 'charset' => 'iso-8859-1',
+            // 'wordwrap' => TRUE,
 
         ];
 
@@ -89,9 +89,8 @@ class Auth extends CI_Controller
 
         if ($type == 'forgot') {
             $this->email->subject('Reset Password');
-            $this->email->message('Click this link to reset your password : <a href="' . base_url() . 'auth/resetpassword?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Reset Password</a>');
+            $this->email->message('Click this link to reset your password (only valid for 1 hour): <a href="' . base_url() . 'auth/resetpassword?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Reset Password</a>');
         }
-
 
         if ($this->email->send()) {
             return true;
@@ -117,7 +116,8 @@ class Auth extends CI_Controller
                 $token = base64_encode(random_bytes(32));
                 $user_token = [
                     'email' => $email,
-                    'token' => $token
+                    'token' => $token,
+                    'date_created' => time()
                 ];
                 $this->db->insert('user_token', $user_token);
                 $this->_sendEmail($token, 'forgot');
@@ -139,9 +139,15 @@ class Auth extends CI_Controller
 
         if ($user) {
             $user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
+
             if ($user_token) {
-                $this->session->set_userdata('reset_email', $email);
-                $this->changePassword();
+                if (time() - $user_token['date_created'] < (60 * 60)) {
+                    $this->session->set_userdata('reset_email', $email);
+                    $this->changePassword();
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Reset password failed! Token expired!</div>');
+                    redirect('auth');
+                }
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Reset password failed! Wrong token!</div>');
                 redirect('auth');

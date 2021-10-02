@@ -23,8 +23,8 @@
                         </div>
                         <div class="form-group">
                             <label for="image">Image</label>
-                            <img src="base_url()/assets/img/<?= $myproduct['image'] ?>">Image</img>
-                            <input type="file" name="image" class="form-control" id="image" value="<?= $myproduct['image']; ?>">
+                            <img src="<?= base_url('assets/img/products/') . $myproduct['image']; ?>"></img>
+                            <input type="file" name="image" class="" id="image" value="<?= $myproduct['image']; ?>">
                             <small class="form-text text-danger"><?= form_error('image'); ?></small>
                         </div>
                         <div class="form-group">

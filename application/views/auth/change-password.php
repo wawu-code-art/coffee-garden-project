@@ -23,7 +23,7 @@
                                         <?= form_error('password1', '<small class="text-danger pl3">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="Enter New Password...">
+                                        <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="Repeat New Password...">
                                         <?= form_error('password2', '<small class="text-danger pl3">', '</small>'); ?>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">

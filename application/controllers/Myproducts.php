@@ -45,7 +45,6 @@ class Myproducts extends CI_Controller
 
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('price', 'Price', 'required|numeric');
-        // $this->form_validation->set_rules('image', 'Image', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required');
 
         if ($this->form_validation->run() == false) {
@@ -85,9 +84,53 @@ class Myproducts extends CI_Controller
             $this->load->view('myproducts/ubah', $data);
             $this->load->view('templates/admin_footer');
         } else {
-            $this->Myproducts_model->ubahDataProducts();
+            $newdata = [
+                "name" => $this->input->post('name', true),
+                "price" => $this->input->post('price', true),
+                "image" => $_FILES['image']['name'],
+                "description" => $this->input->post('description', true),
+            ];
+
+            // cek jika ada gambar yang akan diupload
+            $upload_image = $_FILES['image']['name'];
+
+            if ($upload_image) {
+                $config['allowed_types']    = 'gif|jpg|png|jpeg';
+                $config['max_size']         = '2048';
+                $config['upload_path']      = './assets/img/products/';
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('image')) {
+                    $old_image = $data['myproduct']['image'];
+                    if ($old_image != 'default.jpg') {
+                        unlink(FCPATH . 'assets/img/products/' . $old_image);
+                    }
+                    var_dump($old_image);
+                    // die;
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->set('image', $new_image);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+                $this->db->where('product_id', $this->input->post('id'));
+                $this->db->update('products', $newdata);
+            }
+            // $this->Myproducts_model->ubahDataProducts();
             $this->session->set_flashdata('flash', 'Changed');
             redirect('myproducts');
         }
+    }
+
+    public function content()
+    {
+        $data['title'] = 'Content';
+        $data['admin'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('templates/admin_header', $data);
+        $this->load->view('templates/admin_sidebar', $data);
+        $this->load->view('templates/admin_topbar', $data);
+        $this->load->view('myproducts/content', $data);
+        $this->load->view('templates/admin_footer');
     }
 }

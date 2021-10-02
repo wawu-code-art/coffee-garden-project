@@ -51,7 +51,6 @@ class Admin extends CI_Controller
                 $this->load->library('upload', $config);
 
                 if ($this->upload->do_upload('image')) {
-
                     $old_image = $data['admin']['image'];
                     if ($old_image != 'default.jpg') {
                         unlink(FCPATH . 'assets/img/admin/' . $old_image);
@@ -63,11 +62,9 @@ class Admin extends CI_Controller
                     echo $this->upload->display_errors();
                 }
             }
-
             $this->db->set('name', $name);
             $this->db->where('email', $email);
             $this->db->update('user');
-
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated!</div>');
             redirect('admin');
         }
